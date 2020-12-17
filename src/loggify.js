@@ -1,16 +1,6 @@
 "use strict"; 
 const axios = require('axios');
-const config_post_loggify = (data,params = {}) =>  {
-  return {
-    url:'/loggify',
-    baseUrl:'http://104.248.103.156:1339',
-    params,
-    data,
-    timeout: 5000,
-    withCredentials: false, // default
-    
-  }  
-}
+const url = 'http://104.248.103.156:1339/loggify'
 
 class Loggify {
   constructor(workspaceId,workspaceCode,workspaceName,hashCode) {
@@ -20,9 +10,13 @@ class Loggify {
       this.hashCode = hashCode;
   }
 
-  log(title,message,estado = "error") {
-    return axios.request(config_post_loggify({title,message,estado}));
+  async log(title,message,estado = "error") {
+    const params = {workspaceId:this.workspaceId,workspaceCode:this.workspaceCode,workspaceName:this.workspaceName,hashCode:this.hashCode,title,message,estado}
+    const response = await axios.post(url,params);
+    return response.data
   }
+
+
 }
 
 
