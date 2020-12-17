@@ -10,8 +10,8 @@ class Loggify {
       this.hashCode = hashCode;
   }
 
-  async log(title,message,estado = "error") {
-    const params = {workspaceId:this.workspaceId,workspaceCode:this.workspaceCode,workspaceName:this.workspaceName,hashCode:this.hashCode,title,message,estado}
+  async log(title,message,estado = "error",grupo = '') {
+    const params = {workspaceId:this.workspaceId,workspaceCode:this.workspaceCode,workspaceName:this.workspaceName,hashCode:this.hashCode,title,message,estado,grupo}
     const response = await axios.post(url,params);
     return response.data
   }
