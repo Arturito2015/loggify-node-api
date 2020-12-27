@@ -4,15 +4,13 @@ const url = 'http://104.248.103.156:1339/loggify'
 
 class Loggify {
 
-  static initialize(workspaceId,workspaceCode,workspaceName,hashCode){
+  static initialize(workspaceCode,hashCode){
     this.workspaceCode = workspaceCode;
-    this.workspaceName = workspaceName;
-    this.workspaceId = workspaceId;
     this.hashCode = hashCode;
   }
 
   static async log(title,message,estado = "error",grupo = '') {
-    const params = {workspaceId:this.workspaceId,workspaceCode:this.workspaceCode,workspaceName:this.workspaceName,hashCode:this.hashCode,title,message,estado,grupo}
+    const params = {workspaceCode:this.workspaceCode,hashCode:this.hashCode,title,message,estado,grupo}
     const response = await axios.post(url,params);
     return response.data
   }
